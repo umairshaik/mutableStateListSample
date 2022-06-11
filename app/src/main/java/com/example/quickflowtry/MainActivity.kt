@@ -21,9 +21,6 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
@@ -58,12 +55,8 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     private fun ParentLayout(viewModel: MainActivityViewModel = viewModel()) {
-        val snapshotStateList: SnapshotStateList<List<Int>> = remember {
-            mutableStateListOf()
-        }
         val uiStateModel by viewModel.uiState.collectAsState()
         val onClickIncrement = { viewModel.incrementByOne() }
-        snapshotStateList.add(uiStateModel.data)
         val modifier = Modifier
         Column(
             modifier = modifier.fillMaxWidth(),
@@ -71,7 +64,7 @@ class MainActivity : ComponentActivity() {
         ) {
             DataHolder(
                 modifier = modifier,
-                data = snapshotStateList.last(),
+                data = uiStateModel,
                 onClick = onClickIncrement
             )
         }
