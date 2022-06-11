@@ -1,7 +1,6 @@
 package com.example.quickflowtry
 
 import android.os.Parcelable
-import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -9,7 +8,7 @@ import kotlinx.coroutines.flow.getAndUpdate
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class UiStateModel(val data: List<Int> = mutableStateListOf()) : Parcelable
+data class UiStateModel(val data: List<Int> = emptyList()) : Parcelable
 
 class MainActivityViewModel : ViewModel() {
     private var iterator: Int = 1
